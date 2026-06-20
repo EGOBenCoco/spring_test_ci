@@ -38,6 +38,7 @@ jobs:
             egokirill/spring-github-action:latest
             egokirill/spring-github-action:${{ github.run_number }}
 
+
   deploy-simulation:
     runs-on: ubuntu-latest
     needs: build
