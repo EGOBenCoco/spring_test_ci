@@ -35,3 +35,20 @@ jobs:
           context: .
           push: true
           tags: egokirill/spring-github-action:latest
+
+  deploy-simulation:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Pull Docker image
+        run: docker pull egokirill/spring-github-action:latest
+
+      - name: Run container
+        run: docker run -d -p 8080:8080 --name app egokirill/spring-github-action:latest
+
+      - name: Wait for app
+        run: sleep 10
+
+      - name: Check health endpoint
+        run: curl http://localhost:8080/
